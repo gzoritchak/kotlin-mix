@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
+
+    <title>Kotlin Mix</title>
+    <link rel="stylesheet" href="../static/css/main.css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" media="screen" href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div id="navigation" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <!--<div class="col-md-12">-->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><b>MIX-IT</b></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li ><a href="/" class="smothscroll">Thymeleaf</a></li>
+                <li class="active"><a href="/angular" class="smothscroll">Angular</a></li>
+                <li ><a href="/" class="smothscroll">Kotlinx</a></li>
+                <li><a href="#contact" class="smothScroll">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--</div>-->
+</div>
+<div id="headerwrap">
+    <div class="container">
+        <div class="row">
+            <h1 class="col-md-12">Kotlin Mix</h1>
+        </div>
+    </div>
+
+</div>
+<section id="home"></section>
+<div class="container" ng-app="hotelApp" ng-controller="HotelsCtrl">
+    <div class="row">
+
+        <div class="hotel col-md-6" ng-repeat="hotel in hotels">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"
+                        ng-hide="hotel.edit == true"
+                        ng-dblclick="hotel.edit = true">{{ hotel.name}}</h3>
+
+                    <div class="editName" ng-show="hotel.edit == true">
+                        <input ng-model="hotel.name"  />
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="changeName(hotel)">Valider</button>
+                    </div>
+
+                </div>
+                <div class="panel-body">
+                    {{ hotel.address}}<br/>
+                    {{ hotel.zip}} {{ hotel.city }}<br/>
+                    {{ hotel.country}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section id="contact" name="contact"></section>
+<div id="footerwrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Gaetan Zoritchak</h3>
+                <p>
+                    <a href="https://twitter.com/gz_k">twitter.com/gz_k</a><br/>
+                    <a href="mailto:g.zoritchak@gmail.com">g.zoritchak@gmail.com</a><br/>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="http://cdn.jsdelivr.net/webjars/angularjs/1.5.3/angular.min.js" th:src="@{/webjars/angularjs/1.5.3/angular.min.js}"></script>
+<script src="../static/js/app.js" th:src="@{/js/app.js}"></script>
+</body>
+</html>
