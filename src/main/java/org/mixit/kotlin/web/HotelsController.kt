@@ -1,14 +1,18 @@
 package org.mixit.kotlin.web
 
-import com.github.javafaker.Faker
+import org.mixit.kotlin.domain.Hotel
+import org.mixit.kotlin.service.HotelService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 
 @Controller
 class HotelsController {
 
+    @Autowired
+    lateinit var hotelService: HotelService
 
-    data class Hotel(
+    data class HotelVo(
             val id:Long,
             val name: String,
             val address:String,
@@ -17,20 +21,13 @@ class HotelsController {
             val country:String = "France"
     )
 
-    val faker = Faker()
 
+    fun Hotel.toVo() = HotelVo(
+            id!!, name!!, address ?: "", zip ?: "", city?.name ?: "", city?.country ?: "")
 
     @RequestMapping("/api/hotels",method = arrayOf(RequestMethod.GET))
     @ResponseBody
-    fun getHotels() =
-            (1..33).map {
-                Hotel(it.toLong(),
-                        "Hotel ${faker.address().cityName()}",
-                        "${faker.address().streetAddress()}",
-                        "${faker.address().zipCode()}",
-                        "${faker.address().cityName()}")
-            }
-
+    fun getHotels() = hotelService.hotels.map { it.toVo() }
 
     data class ChangeNameCmd (val name: String)
 
@@ -38,6 +35,7 @@ class HotelsController {
     @ResponseBody
     fun changeName(@PathVariable id:Long, @RequestBody cmd:ChangeNameCmd){
         println("Changing name of hotel $id :: $cmd")
+        hotelService.changeName(id, cmd.name)
     }
 
 }
