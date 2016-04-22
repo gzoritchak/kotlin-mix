@@ -1,7 +1,7 @@
 Kotlin Hands-on
 ===============
 
-This project was used for the Kotlin's Hands-On at Mix-It 2016.
+This project was used for the [Kotlin's Hands-On at Mix-It 2016](https://www.mix-it.fr/session/3202/).
 
 The original branch, 'java', is a basic spring boot project using JPA, Thymeleaf, Angular.js.
 
